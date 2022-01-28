@@ -60,7 +60,7 @@ namespace Scripts
                 Run("dotnet", $"build -c {buildConfig} --no-restore"));
             
             Target("test", DependsOn("compile"), () =>
-                Run("dotnet", $"test -c {buildConfig} --no-build", workingDirectory: @"tests/Miru.Tests"));
+                Run("dotnet", $"test -c {buildConfig} --no-build", workingDirectory: @"tests/Miru.Userfy.Invitable.Tests"));
             
             Target("pack", DependsOn("compile"), () =>
             {
