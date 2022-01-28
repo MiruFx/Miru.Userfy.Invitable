@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <GenerateProgramFile>false</GenerateProgramFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Miru.PageTesting" Version="0.8.27" />
+        <PackageReference Include="Miru.PageTesting.Chrome" Version="0.8.27" />
+        
+        <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="95.0.4638.1700" />
+        <PackageReference Include="NUnit3TestAdapter" Version="4.1.0" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\tests\AltBank.Tests\AltBank.Tests.csproj" />
+        <ProjectReference Include="..\..\src\AltBank\AltBank.csproj" />
+    </ItemGroup>
+    
+</Project>

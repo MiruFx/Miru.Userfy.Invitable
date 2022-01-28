@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Miru" Version="0.8.41" />
+    </ItemGroup>
+    
+    <ItemGroup>
+        <EmbeddedResource Include="**/*.stub" />
+    </ItemGroup>
+
+</Project>

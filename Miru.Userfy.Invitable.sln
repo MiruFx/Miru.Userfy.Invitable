@@ -1,0 +1,62 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Miru.Userfy.Invitable", "src\Miru.Userfy.Invitable\Miru.Userfy.Invitable.csproj", "{BECBDEA6-3F20-464B-A0DE-1453F5C2577E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Miru.Userfy.Invitable.Tests", "tests\Miru.Userfy.Invitable.Tests\Miru.Userfy.Invitable.Tests.csproj", "{84D61734-7E02-4152-8DC4-EAB62E56A79E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2B570CAD-E055-4055-BCF9-A246A1FB4F5E}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		README.md = README.md
+		.editorconfig = .editorconfig
+		Directory.Build.props = Directory.Build.props
+		.github\workflows\ci.yml = .github\workflows\ci.yml
+		.github\workflows\release.yml = .github\workflows\release.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{5FF2843E-74A7-4182-8DE2-061B275684F9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AltBank", "samples\AltBank\src\AltBank\AltBank.csproj", "{9F67B40A-DAE5-4FBE-B692-396622BB1F54}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AltBank.Tests", "samples\AltBank\tests\AltBank.Tests\AltBank.Tests.csproj", "{6481AD00-0E7E-42DD-A918-4D0779606240}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scripts", "scripts\Scripts.csproj", "{658814CC-E9C6-453D-A6F9-6ECDEF064D4A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BECBDEA6-3F20-464B-A0DE-1453F5C2577E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BECBDEA6-3F20-464B-A0DE-1453F5C2577E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BECBDEA6-3F20-464B-A0DE-1453F5C2577E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BECBDEA6-3F20-464B-A0DE-1453F5C2577E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84D61734-7E02-4152-8DC4-EAB62E56A79E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84D61734-7E02-4152-8DC4-EAB62E56A79E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84D61734-7E02-4152-8DC4-EAB62E56A79E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84D61734-7E02-4152-8DC4-EAB62E56A79E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F67B40A-DAE5-4FBE-B692-396622BB1F54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F67B40A-DAE5-4FBE-B692-396622BB1F54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F67B40A-DAE5-4FBE-B692-396622BB1F54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F67B40A-DAE5-4FBE-B692-396622BB1F54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6481AD00-0E7E-42DD-A918-4D0779606240}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6481AD00-0E7E-42DD-A918-4D0779606240}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6481AD00-0E7E-42DD-A918-4D0779606240}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6481AD00-0E7E-42DD-A918-4D0779606240}.Release|Any CPU.Build.0 = Release|Any CPU
+		{658814CC-E9C6-453D-A6F9-6ECDEF064D4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{658814CC-E9C6-453D-A6F9-6ECDEF064D4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{658814CC-E9C6-453D-A6F9-6ECDEF064D4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{658814CC-E9C6-453D-A6F9-6ECDEF064D4A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9F67B40A-DAE5-4FBE-B692-396622BB1F54} = {5FF2843E-74A7-4182-8DE2-061B275684F9}
+		{6481AD00-0E7E-42DD-A918-4D0779606240} = {5FF2843E-74A7-4182-8DE2-061B275684F9}
+	EndGlobalSection
+EndGlobal

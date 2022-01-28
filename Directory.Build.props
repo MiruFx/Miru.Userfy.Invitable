@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+
+    <RepositoryUrl>https://github.com/MiruFx/Miru.Userfy.Invitable</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/MiruFx/Miru.Userfy.Invitable</PackageProjectUrl>
+    <PackageIcon>Miru-Logo.png</PackageIcon>
+    <Version>0.0.1</Version>
+    
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>miru asp.net asp.net-core .net .net-6 fullstack framework user management invitation invitable</PackageTags>
+
+    <Authors>Joao Carlos Clementoni</Authors>
+    <Copyright>Copyright (c) 2022 Joao Carlos Clementoni</Copyright>
+
+    <PackageOutputPath>..\..\packages</PackageOutputPath>
+    <IncludeSymbols>true</IncludeSymbols>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <Deterministic>true</Deterministic>
+    
+    <MinVerSkip Condition="'$(Configuration)' == 'Debug'">true</MinVerSkip>
+    <MinVerTagPrefix>v</MinVerTagPrefix>
+    <ContinuousIntegrationBuild Condition="'$(GITHUB_ACTIONS)' == 'true'">true</ContinuousIntegrationBuild>
+  </PropertyGroup>
+
+  <ItemGroup Condition="$(IsPackable) == 'true'">
+    <None Include="..\..\docs\Miru-Logo.png" Pack="true" PackagePath="\"/>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+    <PackageReference Include="MinVer" Version="2.5.0" PrivateAssets="All" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+</Project>

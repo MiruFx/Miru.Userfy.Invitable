@@ -1,0 +1,27 @@
+@model InvitationNew.Command
+
+<h3 class="text-center">New invitation</h3>
+
+<miru-form class="my-4">
+
+    <miru-summary />
+
+    <div class="alert alert-info">
+        The invited User will receive an email with instructions for registration
+    </div>
+
+    <div class="row my-4">
+        <div class="col-12">
+            <miru-label for="Email" />
+            <div class="col-auto">
+                <miru-input for="Email" />
+                <miru-validation for="Email" />
+            </div>
+        </div>
+    </div>
+    
+    <div class="my-4">
+        <miru-submit text="Invite" class="me-3"/>
+    </div>
+    
+</miru-form>

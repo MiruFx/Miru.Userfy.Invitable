@@ -1,0 +1,38 @@
+@model AccountRegister.Command
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+
+        <h3>New Account</h3>
+
+        <miru-form>
+
+            <miru-summary/>
+            
+            <div class="my-3">
+                <miru-label for="Email"/>
+                <miru-input for="Email"/>
+                <miru-validation for="Email"/>
+            </div>
+            
+            <div class="my-3">
+                <miru-label for="Password"/>
+                <miru-input for="Password"/>
+                <miru-validation for="Password"/>
+            </div>
+            
+            <div class="my-3">
+                <miru-label for="PasswordConfirmation"/>
+                <miru-input for="PasswordConfirmation"/>
+                <miru-validation for="PasswordConfirmation"/>
+            </div>
+            
+            <miru-submit value="Create"/>
+            
+            <div class="my-4">
+                Already have an account? <a for="@(new AccountLogin())">Login</a>
+            </div>
+            
+        </miru-form>
+    </div>
+</div>

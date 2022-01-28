@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Bullseye" Version="3.7.0" />
+    <PackageReference Include="SimpleExec" Version="7.0.0" />
+    <PackageReference Include="CommandLineParser" Version="2.8.0" />
+    <PackageReference Include="Miru" Version="0.8.41" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Build.cs" />
+    <Compile Include="ExportStubs.cs" />
+    <Compile Include="InvitableStubExport.cs" />
+    <Compile Include="StubExport.cs" />
+    <Compile Include="StubParams.cs" />
+  </ItemGroup>
+ 
+</Project>

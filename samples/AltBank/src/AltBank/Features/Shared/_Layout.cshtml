@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="turbo-cache-control" content="no-cache">
+    <miru-antiforgery name="csrf-token"/>
+
+    <title>AltBank</title>
+
+    <script mix-src="/js/app.js" defer></script>
+    <link mix-href="/css/app.css" rel="stylesheet"/>
+
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+
+</head>
+<body>
+
+<div id="app">
+
+    <partial name="/Features/Shared/_Nav.cshtml"/>
+
+    <main class="container">
+
+        <div class="my-4">
+
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    
+                    <flash dismissable="false"  />
+                                
+                    <div class="card m-3">
+                        <div class="card-body m-3">
+                            @RenderBody()
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+        </div>
+        
+        <footer class="pt-4 my-md-5 pt-md-5 border-top">
+            <div class="row">
+                <div class="col-12 col-md">
+                    AltBank
+                    <small class="d-block mb-3 text-muted">2021</small>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+@model UserRegister.Command
+
+<h3 class="text-center">User Registration</h3>
+
+<miru-form class="my-4">
+
+    <miru-summary />
+
+    <miru-input for="Token" type="hidden" />
+    
+    <div class="alert alert-info">
+        Complete your registration
+    </div>
+
+    <div class="row my-4">
+        <div class="col-8">
+            <miru-label for="Password" />
+            <div class="col-auto">
+                <miru-input for="Password" />
+                <miru-validation for="Password" />
+            </div>
+        </div>
+    </div>
+
+    <div class="row my-4">
+        <div class="col-8">
+            <miru-label for="PasswordConfirmation" />
+            <div class="col-auto">
+                <miru-input for="PasswordConfirmation" />
+                <miru-validation for="PasswordConfirmation" />
+            </div>
+        </div>
+    </div>
+
+    <div class="my-4">
+        <miru-submit text="Register" class="me-3"/>
+    </div>
+    
+</miru-form>

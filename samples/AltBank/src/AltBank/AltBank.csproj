@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Miru" Version="0.8.41" />
+    <PackageReference Include="Miru.Sqlite" Version="0.8.41" />
+
+    <PackageReference Include="Emet.FileSystems" Version="0.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\src\Miru.Userfy.Invitable\Miru.Userfy.Invitable.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Compile Remove="wwwroot\**" />
+    <Content Remove="wwwroot\**" />
+  </ItemGroup>
+
+</Project>

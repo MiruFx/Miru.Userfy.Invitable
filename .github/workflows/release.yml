@@ -1,0 +1,26 @@
+name: Release
+
+on:
+  push:
+    tags:
+    - '*.*.*'
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    
+    - name: Setup .NET 6
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: "6.0.100"
+
+    - name: Build & Publish
+      env:
+        Miru_Database__ConnectionString: "DataSource={{ db_dir }}Mong_test.db"
+      run: ./build publish-nuget --key ${{ secrets.NUGET_KEY }}

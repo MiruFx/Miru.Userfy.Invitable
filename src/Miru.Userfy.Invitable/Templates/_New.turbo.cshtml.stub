@@ -1,0 +1,14 @@
+@model InvitationNew.Result
+
+<turbo-stream action="replace" target="@Naming.Form(Model)">
+    <template>
+        <div class="alert alert-success">
+            <p>
+                @Model.Email has been invited
+            </p>
+            <p>
+                <a for="@(new InvitationNew())">Invite another User</a>
+            </p>
+        </div>
+    </template>
+</turbo-stream>
