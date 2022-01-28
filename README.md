@@ -2,8 +2,8 @@
     <img src="https://mirufx.github.io/Miru-Logo-Text.png" />
 </p>
 
-[![NuGet](https://img.shields.io/nuget/vpre/miru.svg)](https://www.nuget.org/packages/miru)
-[![Build](https://github.com/MiruFx/Miru/workflows/CI/badge.svg)](https://github.com/MiruFx/Miru/actions?query=workflow%3ACI)
+[![NuGet](https://img.shields.io/nuget/vpre/Miru.Userfy.Invitable.svg)](https://www.nuget.org/packages/Miru.Userfy.Invitable)
+[![Build](https://github.com/MiruFx/Miru.Userfy.Invitable/workflows/CI/badge.svg)](https://github.com/MiruFx/Miru.Userfy.Invitable/actions?query=workflow%3ACI)
 
 ## About Miru Userfy Invitable
 
