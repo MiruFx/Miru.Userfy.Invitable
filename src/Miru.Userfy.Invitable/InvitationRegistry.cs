@@ -1,4 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
+using Miru.Consolables;
 using System;
 
 namespace Miru.Userfy.Invitable;
@@ -16,6 +17,8 @@ public static class InvitationRegistry
         
         // TODO: try to add Inactivable
 
+        services.AddConsolable<InvitableInstallConsolable>();
+        
         return services
             .AddSingleton(options)
             .AddScoped<UserInvitation<TUser>>();
