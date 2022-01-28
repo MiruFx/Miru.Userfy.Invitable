@@ -1,0 +1,134 @@
+using Baseline;
+using Miru.Core;
+using Scriban;
+using System;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+
+namespace Miru.Userfy.Invitable;
+
+public class Maker
+{
+    public bool DryRun { get; set; }
+        
+    public static Maker For(MiruPath currentDirectory)
+    {
+        return new Maker(new MiruSolution(currentDirectory));
+    }
+        
+    public static Maker For(MiruPath currentDirectory, string solutionName)
+    {
+        if (Path.GetFileName(currentDirectory).Equals(solutionName) == false)
+            currentDirectory = Path.Combine(currentDirectory, solutionName);
+            
+        return new Maker(new MiruSolution(currentDirectory));
+    }
+        
+    public MiruSolution Solution { get; }
+    public Assembly Assembly { get; }
+
+    public Maker(MiruSolution solution, Assembly assembly = null)
+    {
+        DryRun = Environment.GetCommandLineArgs().Contains("--dry");
+        Solution = solution;
+        Assembly = assembly ?? typeof(Maker).GetTypeInfo().Assembly;
+    }
+
+    public void Directory(params string[] paths)
+    {
+        var newDir = paths.Length > 0
+            ? A.Path / Solution.RootDir / paths
+            : A.Path / Solution.RootDir;
+            
+        var shortDestination = Path.Combine(paths);
+            
+        if (!DryRun)
+            System.IO.Directory.CreateDirectory(newDir);
+            
+        Console2.YellowLine($"\tCreate\t{(paths.Length > 0 ? shortDestination : newDir.ToString())}");
+    }
+
+    public void Template(string templateName, params string[] to)
+    {
+        Template(templateName, new
+        {
+            Solution,
+            MiruInfo.MiruVersion
+        }, to);
+    }
+
+    public void Template(string templateName, object input, params string[] to)
+    {
+        var template = GetTemplate(templateName);
+
+        var shortDestination = Path.Combine(to);
+            
+        var destination = Path.Combine(Solution.RootDir, shortDestination);
+
+        if (File.Exists(destination))
+        {
+            Console2.GreyLine($"\tSkip\t{Solution.RootDir.Relative(destination)}");
+            return;
+        }
+
+        Console2.YellowLine($"\tCreate\t{Solution.RootDir.Relative(destination)}");
+            
+        var result = template.Render(new
+        {
+            Solution,
+            MiruInfo.MiruVersion,
+            input
+        }, member => member.Name);
+
+        if (!DryRun)
+        {
+            Directories.CreateIfNotExists(Path.GetDirectoryName(destination));
+            File.AppendAllText(destination, result);
+        }
+    }
+
+    private Template GetTemplate(string templateName)
+    {
+        if (!templateName.EndsWith(".stub"))
+            templateName += ".stub";
+
+        var templateText = ReadEmbedded(templateName);
+
+        var template = Scriban.Template.Parse(templateText);
+        return template;
+    }
+
+    public string ReadEmbedded(string fileName)
+    {
+        var @namespace = typeof(Maker).Namespace;
+        var resourceName = $"{@namespace}.Templates.{fileName}";
+            
+        var stream = this.Assembly.GetManifestResourceStream(resourceName);
+
+        if (stream == null)
+            throw new FileNotFoundException($"Could not find the resource: {resourceName}");
+            
+        using (stream)
+        {
+            return stream.ReadAllText();
+        }
+    }
+
+    public MiruPath Expand(string @in)
+    {
+        return Path.Combine(@in.Split("/"));
+    }
+
+    public string Namespace(string @in)
+    {
+        return @in
+            .Replace('\\', '.')
+            .Replace('/', '.');
+    }
+        
+    public string Url(string urlIn)
+    {
+        return urlIn.Replace('\\', '/');
+    }
+}

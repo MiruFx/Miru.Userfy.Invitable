@@ -1,7 +1,9 @@
 using System.Threading.Tasks;
 using Miru.Consolables;
 using Miru.Core;
+using Miru.Userfy.Invitable;
 using System;
+using Maker = Miru.Userfy.Invitable.Maker;
 
 public class InvitableInstallConsolable : Consolable
 {
@@ -21,7 +23,7 @@ public class InvitableInstallConsolable : Consolable
 
         public async Task Execute()
         {
-            var maker = new Maker(_solution);
+            var maker = new Maker(_solution, typeof(IInvitable).Assembly);
 
             Console2.WhiteLine("Installing Miru.Userfy.Invitable");
             Console2.BreakLine();
