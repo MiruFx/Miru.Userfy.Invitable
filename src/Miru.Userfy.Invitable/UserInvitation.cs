@@ -47,4 +47,16 @@ public class UserInvitation<TUser>
         else
             await _mailer.SendNowAsync(new UserInvitationMail<TUser>(user, _options));
     }
+    
+    public async Task ResendInvitationAsync(
+        TUser user,
+        CancellationToken ct = default)
+    {
+        user.Invite();
+        
+        if (_options.SendEmailLater)
+            await _mailer.SendLaterAsync(new UserInvitationMail<TUser>(user, _options));
+        else
+            await _mailer.SendNowAsync(new UserInvitationMail<TUser>(user, _options));
+    }
 }

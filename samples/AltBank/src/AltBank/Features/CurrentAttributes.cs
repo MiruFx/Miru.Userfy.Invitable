@@ -3,7 +3,7 @@ using Miru.Userfy;
 
 namespace AltBank.Features;
 
-public class CurrentScope : ICurrentScope
+public class CurrentAttributes : ICurrentAttributes
 {
     private bool _initialized;
     
@@ -11,7 +11,7 @@ public class CurrentScope : ICurrentScope
     private readonly AppDbContext _db;
     private readonly ICurrentUser _currentUser;
 
-    public CurrentScope(
+    public CurrentAttributes(
         Current current,
         AppDbContext db, 
         ICurrentUser currentUser)

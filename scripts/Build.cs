@@ -8,171 +8,170 @@ using Miru.Core;
 using static Bullseye.Targets;
 using static SimpleExec.Command;
 
-namespace Scripts
+namespace Scripts;
+
+internal class Build
 {
-    internal class Build
+    public class Options
     {
-        public class Options
-        {
-            [Value(0)]
-            public string Target { get; set; }
+        [Value(0)]
+        public string Target { get; set; }
             
-            [Option('k', "key", Required = false, HelpText = "Nuget server's API key to push packages")]
-            public string Key { get; set; }
+        [Option('k', "key", Required = false, HelpText = "Nuget server's API key to push packages")]
+        public string Key { get; set; }
             
-            [Option('d', "debug", Required = false, HelpText = "Compile in 'Debug' mode instead of 'Release'")]
-            public bool Debug { get; set; }
-        }
+        [Option('d', "debug", Required = false, HelpText = "Compile in 'Debug' mode instead of 'Release'")]
+        public bool Debug { get; set; }
+    }
         
-        // package id and if include symbols
-        private static readonly Dictionary<string, bool> Packages = new()
-        {
-            { "Miru.Userfy.Invitable", true },
-        };
+    // package id and if include symbols
+    private static readonly Dictionary<string, bool> Packages = new()
+    {
+        { "Miru.Userfy.Invitable", true },
+    };
 
-        private static int Main(string[] args)
-        {
-            var success = true;
+    private static int Main(string[] args)
+    {
+        var success = true;
             
-            new Parser(with => with.EnableDashDash = true).ParseArguments<Options>(args)
-                .WithParsed(option => RunBuild(option, args))
-                .WithNotParsed(e =>
-                {
-                    success = false;
-                });
-
-            return success ? 0 : -1;
-        }
-
-        public static void RunBuild(Options option, string[] args)
-        {
-            var buildConfig = option.Debug ? "Debug" : "Release";
-
-            Target("default", DependsOn("compile"));
-
-            Target("clean", () =>
-                EnsureDirectoriesDeleted("artifacts", "packages"));
-
-            Target("restore", DependsOn("clean"), () =>
-                Run("dotnet", "restore"));
-
-            Target("compile", DependsOn("restore", "export-stubs"), () =>
-                Run("dotnet", $"build -c {buildConfig} --no-restore"));
-            
-            Target("test", DependsOn("compile"), () =>
-                Run("dotnet", $"test -c {buildConfig} --no-build", workingDirectory: @"tests/Miru.Userfy.Invitable.Tests"));
-            
-            Target("pack", DependsOn("compile"), () =>
+        new Parser(with => with.EnableDashDash = true).ParseArguments<Options>(args)
+            .WithParsed(option => RunBuild(option, args))
+            .WithNotParsed(e =>
             {
-                foreach (var releasable in Packages)
-                {
-                    Run("dotnet", $"pack src\\{releasable.Key} -c {buildConfig} --nologo");
-                }
+                success = false;
             });
-            
-            Target("test-ci", DependsOn("test"));
 
-            Target("pack-quick", DependsOn("compile"), () =>
-            {
-                foreach (var releasable in Packages)
-                {
-                    Run("dotnet", $"pack src\\{releasable.Key} -c {buildConfig} --nologo --no-build");
-                }
-            });
-            
-            Target("publish-nuget", DependsOn("compile", "pack"), () =>
-            {
-                PushPackages(option.Key, "https://api.nuget.org/v3/index.json");
-            });
-            
-            // Target("publish-docs", () =>
-            // {
-            //     Shell("npm", "run docs:build");
-            //     Run("git", "init", workingDirectory: @"docs/.vuepress/dist");
-            //     Run("git", "add -A", workingDirectory: @"docs/.vuepress/dist");
-            //     Run("git", "commit -m 'Deploy'", workingDirectory: @"docs/.vuepress/dist");
-            //     Run("git", "remote add origin https://github.com/MiruFx/mirufx.github.io.git", workingDirectory: @"docs/.vuepress/dist");
-            //     Run("git", "push --set-upstream origin master -f", workingDirectory: @"docs/.vuepress/dist");
-            // });
+        return success ? 0 : -1;
+    }
 
-            Target("export-stubs", ExportStubs.Export);
-            
-            // Target("test-new-solution", TestNewSolution.Test);
-            
-            Target("deep-clean", DeepClean);
-            
-            RunTargetsAndExit(new[] { option.Target });
-        }
+    public static void RunBuild(Options option, string[] args)
+    {
+        var buildConfig = option.Debug ? "Debug" : "Release";
 
-        private static void DeepClean()
+        Target("default", DependsOn("compile"));
+
+        Target("clean", () =>
+            EnsureDirectoriesDeleted("artifacts", "packages"));
+
+        Target("restore", DependsOn("clean"), () =>
+            Run("dotnet", "restore"));
+
+        Target("compile", DependsOn("restore", "export-stubs"), () =>
+            Run("dotnet", $"build -c {buildConfig} --no-restore"));
+            
+        Target("test", DependsOn("compile"), () =>
+            Run("dotnet", $"test -c {buildConfig} --no-build", workingDirectory: @"tests/Miru.Userfy.Invitable.Tests"));
+            
+        Target("pack", DependsOn("compile"), () =>
         {
-            var searchIn = new[] { "src", "samples", "tests" };
-            var searchFor = new [] { "node_modules", "bin", "obj" };
-            
-            var dirs = searchIn.SelectMany(searchDir => 
-                searchFor.SelectMany(dir => Directory.GetDirectories(searchDir, dir,SearchOption.AllDirectories)));
-
-            foreach (var dir in dirs)
+            foreach (var releasable in Packages)
             {
-                if (Directory.Exists(dir))
-                {
-                    Console2.White($"Deleting {dir}...");
+                Run("dotnet", $"pack src\\{releasable.Key} -c {buildConfig} --nologo");
+            }
+        });
+            
+        Target("test-ci", DependsOn("test"));
+
+        Target("pack-quick", DependsOn("compile"), () =>
+        {
+            foreach (var releasable in Packages)
+            {
+                Run("dotnet", $"pack src\\{releasable.Key} -c {buildConfig} --nologo --no-build");
+            }
+        });
+            
+        Target("publish-nuget", DependsOn("compile", "pack"), () =>
+        {
+            PushPackages(option.Key, "https://api.nuget.org/v3/index.json");
+        });
+            
+        // Target("publish-docs", () =>
+        // {
+        //     Shell("npm", "run docs:build");
+        //     Run("git", "init", workingDirectory: @"docs/.vuepress/dist");
+        //     Run("git", "add -A", workingDirectory: @"docs/.vuepress/dist");
+        //     Run("git", "commit -m 'Deploy'", workingDirectory: @"docs/.vuepress/dist");
+        //     Run("git", "remote add origin https://github.com/MiruFx/mirufx.github.io.git", workingDirectory: @"docs/.vuepress/dist");
+        //     Run("git", "push --set-upstream origin master -f", workingDirectory: @"docs/.vuepress/dist");
+        // });
+
+        Target("export-stubs", ExportStubs.Export);
+            
+        // Target("test-new-solution", TestNewSolution.Test);
+            
+        Target("deep-clean", DeepClean);
+            
+        RunTargetsAndExit(new[] { option.Target });
+    }
+
+    private static void DeepClean()
+    {
+        var searchIn = new[] { "src", "samples", "tests" };
+        var searchFor = new [] { "node_modules", "bin", "obj" };
+            
+        var dirs = searchIn.SelectMany(searchDir => 
+            searchFor.SelectMany(dir => Directory.GetDirectories(searchDir, dir,SearchOption.AllDirectories)));
+
+        foreach (var dir in dirs)
+        {
+            if (Directory.Exists(dir))
+            {
+                Console2.White($"Deleting {dir}...");
                     
-                    try
-                    {
-                        Directory.Delete(dir, true);
-                        Console2.GreenLine("Done");
-                    }
-                    catch (Exception ex)
-                    {
-                        Console2.RedLine($"Failed: {ex.Message}");
-                    }
-                }
-            }
-        }
-
-        private static void EnsureDirectoriesDeleted(params string[] paths)
-        {
-            foreach (var path in paths)
-            {
-                if (Directory.Exists(path))
+                try
                 {
-                    var dir = new DirectoryInfo(path);
-                    DeleteDirectory(dir);
+                    Directory.Delete(dir, true);
+                    Console2.GreenLine("Done");
+                }
+                catch (Exception ex)
+                {
+                    Console2.RedLine($"Failed: {ex.Message}");
                 }
             }
         }
+    }
 
-        private static void DeleteDirectory(DirectoryInfo baseDir)
+    private static void EnsureDirectoriesDeleted(params string[] paths)
+    {
+        foreach (var path in paths)
         {
-            baseDir.Attributes = FileAttributes.Normal;
-            foreach (var childDir in baseDir.GetDirectories())
-                DeleteDirectory(childDir);
-
-            foreach (var file in baseDir.GetFiles())
-                file.IsReadOnly = false;
-
-            baseDir.Delete(true);
+            if (Directory.Exists(path))
+            {
+                var dir = new DirectoryInfo(path);
+                DeleteDirectory(dir);
+            }
         }
+    }
 
-        private static void Shell(string command, string args) =>
-            Run(command, args, windowsName: "cmd.exe", windowsArgs: $"/c {command} {args}");
+    private static void DeleteDirectory(DirectoryInfo baseDir)
+    {
+        baseDir.Attributes = FileAttributes.Normal;
+        foreach (var childDir in baseDir.GetDirectories())
+            DeleteDirectory(childDir);
 
-        private static void PushPackages(string serverApiKey, string serverUrl)
+        foreach (var file in baseDir.GetFiles())
+            file.IsReadOnly = false;
+
+        baseDir.Delete(true);
+    }
+
+    private static void Shell(string command, string args) =>
+        Run(command, args, windowsName: "cmd.exe", windowsArgs: $"/c {command} {args}");
+
+    private static void PushPackages(string serverApiKey, string serverUrl)
+    {
+        if (string.IsNullOrEmpty(serverApiKey))
         {
-            if (string.IsNullOrEmpty(serverApiKey))
-            {
-                Console.WriteLine("No Nuget API key found. Skip publishing");
-                return;
-            }
+            Console.WriteLine("No Nuget API key found. Skip publishing");
+            return;
+        }
             
-            var param = $" -s {serverUrl} -k {serverApiKey} --skip-duplicate";
+        var param = $" -s {serverUrl} -k {serverApiKey} --skip-duplicate";
             
-            foreach (var (package, withSymbols) in Packages)
-            {
-                Console.WriteLine($"Pushing {package}");
-                Run("dotnet", $"nuget push {Path.Combine("packages", package)}.*.nupkg {param}", noEcho: true);
-            }
+        foreach (var (package, withSymbols) in Packages)
+        {
+            Console.WriteLine($"Pushing {package}");
+            Run("dotnet", $"nuget push {Path.Combine("packages", package)}.*.nupkg {param}", noEcho: true);
         }
     }
 }

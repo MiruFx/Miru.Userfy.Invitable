@@ -6,12 +6,12 @@
   </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
-        <PackageReference Include="NUnit3TestAdapter" Version="4.1.0" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
+        <PackageReference Include="NUnit3TestAdapter" Version="4.2.1" />
         <PackageReference Include="Hangfire.MemoryStorage" Version="1.7.0" />
         
-        <PackageReference Include="Miru.Testing" Version="0.8.41" />
-        <PackageReference Include="Miru.Fabrication" Version="0.8.41" />
+        <PackageReference Include="Miru.Testing" Version="0.9.5" />
+        <PackageReference Include="Miru.Fabrication" Version="0.9.5" />
     </ItemGroup>
 
     <ItemGroup>

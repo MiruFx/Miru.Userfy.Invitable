@@ -18,8 +18,8 @@ public class PasswordForgotTest : FeatureTest
 
         // assert
         var job = _.LastEmailSent();
-        job.Data.ToAddresses.ShouldContainEmail(user.Email);
-        job.Data.Body.ShouldContain("password reset");
+        job.ToAddresses.ShouldContainEmail(user.Email);
+        job.Body.ShouldContain("password reset");
     }
 
     public class Validations : ValidationTest<PasswordForgot.Command>

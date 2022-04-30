@@ -11,13 +11,13 @@ Has to be .Sdk.Web to allow unit test asp.net components correctly
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NUnit3TestAdapter" Version="4.1.0" />
-    <PackageReference Include="NUnit" Version="3.13.2" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.2.1" />
+    <PackageReference Include="NUnit" Version="3.13.3" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.4" />
 
-    <PackageReference Include="Miru.Testing" Version="0.8.41" />
-    <PackageReference Include="Miru.Fabrication" Version="0.8.41" />
+    <PackageReference Include="Miru.Testing" Version="0.9.6" />
+    <PackageReference Include="Miru.Fabrication" Version="0.9.6" />
   </ItemGroup>
 
   <ItemGroup>

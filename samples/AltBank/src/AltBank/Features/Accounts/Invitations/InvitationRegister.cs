@@ -3,7 +3,7 @@ using Miru.Userfy.Invitable;
 
 namespace AltBank.Features.Accounts.Invitations;
 
-public class UserRegister
+public class InvitationRegister
 {
     public class Query : IRequest<Command>
     {

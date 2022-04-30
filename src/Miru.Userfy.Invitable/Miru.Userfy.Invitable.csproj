@@ -9,7 +9,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Miru" Version="0.8.41" />
+        <PackageReference Include="Miru" Version="0.9.6" />
     </ItemGroup>
     
     <ItemGroup>

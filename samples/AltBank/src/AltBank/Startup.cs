@@ -25,7 +25,7 @@ public class Startup
                 
             .AddEfCoreSqlite<AppDbContext>()
             
-            .AddCurrentScope<Current, CurrentScope>()
+            .AddCurrentAttributes<Current, CurrentAttributes>()
 
             // miru extensions
             .AddUserfy<User, AppDbContext>(
