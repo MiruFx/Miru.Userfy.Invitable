@@ -7,7 +7,7 @@ public class UserfyInvitableOptions<TUser> where TUser : UserfyUser
 {
     public Action<Email, TUser> MailConfiguration { get; internal set; }
 
-    public bool SendEmailLater { get; set; } = true;
+    public bool SendEmailLater { get; set; } = false;
     
     public void MailConfig(Action<Email> action)
     {

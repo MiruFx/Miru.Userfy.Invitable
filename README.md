@@ -72,7 +72,7 @@ Add into your `Startup.cs` or `Program.cs` ConfigureServices:
 .AddUserfyInvitable<User>(opt =>
 {
     // set true if the email will be queued and send later. otherwise, it will be sent now
-    opt.SendEmailLater = true;
+    opt.SendEmailLater = false; // false by default
     
     // customize the invitation email
     opt.MailConfig((mail, user) =>
