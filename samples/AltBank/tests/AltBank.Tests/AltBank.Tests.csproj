@@ -10,8 +10,8 @@
         <PackageReference Include="NUnit3TestAdapter" Version="4.2.1" />
         <PackageReference Include="Hangfire.MemoryStorage" Version="1.7.0" />
         
-        <PackageReference Include="Miru.Testing" Version="0.9.5" />
-        <PackageReference Include="Miru.Fabrication" Version="0.9.5" />
+        <PackageReference Include="Miru.Testing" Version="0.9.21" />
+        <PackageReference Include="Miru.Fabrication" Version="0.9.21" />
     </ItemGroup>
 
     <ItemGroup>

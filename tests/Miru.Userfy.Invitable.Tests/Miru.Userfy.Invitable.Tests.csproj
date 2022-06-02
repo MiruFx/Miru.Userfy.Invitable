@@ -16,8 +16,8 @@ Has to be .Sdk.Web to allow unit test asp.net components correctly
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.4" />
 
-    <PackageReference Include="Miru.Testing" Version="0.9.6" />
-    <PackageReference Include="Miru.Fabrication" Version="0.9.6" />
+    <PackageReference Include="Miru.Testing" Version="0.9.21" />
+    <PackageReference Include="Miru.Fabrication" Version="0.9.21" />
   </ItemGroup>
 
   <ItemGroup>

@@ -5,8 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Miru" Version="0.9.6" />
-    <PackageReference Include="Miru.Sqlite" Version="0.9.6" />
+    <PackageReference Include="Miru" Version="0.9.21" />
+    <PackageReference Include="Miru.Sqlite" Version="0.9.21" />
   </ItemGroup>
 
   <ItemGroup>
